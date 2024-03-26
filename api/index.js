@@ -5,17 +5,19 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User.js');
 const app = express();
+const cookieParser = require('cookie-parser') ;
 require('dotenv').config();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'asfadjsfadiofjkadvdfga';
 
 app.use(express.json());
+app.use(cookieParser());
 
 const corsOptions = {
     origin: 'http://localhost:5173',
     credentials: true,
     optionSuccessStatus: 200
-}
+};
 
 app.use(cors(corsOptions)); //enables cors for all ports
 
@@ -54,7 +56,7 @@ app.post( '/login', async (req, res) => {
         if(passOk){
             jwt.sign({email: userDoc.email, id: userDoc._id}, jwtSecret, {}, (err, token) => {
                 if(err) throw err;
-                res.cookie('token', token).json("Password ok!!");
+                res.cookie('token', token).json(userDoc);
             });
         }
         else{
@@ -64,6 +66,12 @@ app.post( '/login', async (req, res) => {
     } else {
         res.json('not found');
     }
+});
+
+app.get('/profile', (req, res) => {
+    const {token} = req.cookies;
+    // res.json({token});
+    res.cookie('token', token).json({ token });
 });
 
 
