@@ -25,12 +25,12 @@ The project utilizes the following technologies:
 
 ## Getting Started
 
-To contribute to the Airbnb Clone Project or set it up locally for development, follow these steps:
+To contribute to the Booking App Project or set it up locally for development, follow these steps:
 
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/SehajMander/Airbnb-Clone
+   git clone https://github.com/SehajMander/Booking-App
    ```
 2. Navigate to the Project Directory:
    ```bash
